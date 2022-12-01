@@ -1,0 +1,103 @@
+.background{
+    position:fixed;
+    top:0;
+    width: 100%;
+    height: 35em;
+    padding:2em;
+    background:rgba(0,0,0,0.7);    
+    display:flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    z-index: 99;
+}
+.background > .cartCont{        
+    flex: 0 1 40em;
+    padding:1em;        
+    background: #F5F5F3;
+    border-radius: 1.5em;
+    z-index: 100;
+}
+.cartCont > .section{
+    margin:1em;
+    padding:1em;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 1em;
+}
+.cartCont > .checkOut{
+    font-weight: bolder;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:1em;
+    border-radius: 1.5em;
+    background:#3DC018;
+    cursor:pointer;
+}
+.cartCont > .head{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cartCont > .head p{
+    cursor: pointer;
+}
+.cartCont > .cartItems{    
+    padding-top: 1em;
+    overflow-y: scroll;
+    height: 25em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap:1em;
+}
+.cartItems > .cartItem{
+    width:100%;
+    padding:0.5em;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom:1px solid black;
+}
+.cartItems > .cartItem > .leftSection{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap:0.5em;
+}
+.cartItems > .cartItem > .leftSection> .imageCont{
+    flex: 0 1 6em;
+    height: auto;
+}
+.cartItems > .cartItem > .leftSection> .imageCont img{
+    width: 100%;
+    height: 100%;
+}
+.cartItems > .cartItem > .leftSection> .description{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap:1em;
+}
+.cartItems > .cartItem > .rightSection{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1em;
+}
+.cartItems > .cartItem > .rightSection> .close{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1em;
+    height: 1em;
+    border-radius: 1em;
+    background: white;
+    cursor:pointer;
+}
