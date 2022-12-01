@@ -37,7 +37,9 @@ const PaymentPage = () => {
     { id: 1, title: "Card Number", name: "cardNumber" },
     { id: 2, title: "Card Name", name: "cardName" },
   ];
-  useEffect(() => {}, []);
+  useEffect(() => {
+    scrollToRef(top)
+  }, []);
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -46,7 +48,7 @@ const PaymentPage = () => {
   };
   return (
     <>
-      <div className="Pbackground">
+      <div className="Pbackground" ref={top}>
         <div className="PCont">
           <div className="Phead">
             <h4>Cart</h4>

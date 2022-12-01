@@ -137,9 +137,12 @@ const ProductPage = () => {
                 </div>
               )}
             </div>
+          </div>          
+          <div className="bodyHead">
+            <p>Other Products</p>
           </div>
         </div>
-        <div className="bodyCont">
+        <div className="bodyCont">          
           <div className="body">
             {Prd.map((items) => {
               return <Product {...items} key={items.id} />;

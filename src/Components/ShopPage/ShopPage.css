@@ -22,7 +22,7 @@
 .Section{
     padding-top:2em;
     padding-bottom: 2em;
-    width:80%;
+    width:85%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -72,7 +72,7 @@
     border-radius:0.5em;
 }
 .fadeSection > .baseCont{
-    width:80%;        
+    width:85%;        
     padding:4em 0em 2em 0em;
 }
 .fadeSection > .baseCont > .base{
@@ -110,15 +110,15 @@
 
 .bodyCont{
     width:100%;
-    padding:4em 0em;
+    padding:3em 0em;
     display:flex;
     justify-content: center;
     align-items: center;
 }
 .bodyCont > .body{
-    width:80%;
+    width:85%;
     display:flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap:2.5em;
     flex-wrap: wrap;    

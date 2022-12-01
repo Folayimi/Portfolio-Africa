@@ -32,7 +32,7 @@
     gap:2em;
 }
 .productViewCont > .reviewCont > .reviews > .moreR{
-    padding: 0.5em 1em;
+    padding: 1em;
     border: 1px solid gray;
     border-radius: 1em;
     cursor: pointer;
@@ -175,4 +175,11 @@
 .rightSection > .section > .desc p:hover{
     cursor: pointer;
     font-weight: bolder;
+}
+.productViewCont >.bodyHead{
+    width:85%;
+    text-align: left;
+    color:white;
+    padding-top: 5em;
+    font-size: 1.2rem;
 }
