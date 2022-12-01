@@ -1,9 +1,12 @@
-import React, {useState} from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./CartPage.css";
 import { X } from "heroicons-react";
 
+
 const CartPage = (props) => {
-  const { addCart, setAddCart, cartItems, setCartItems, total, setTotal } = props;  
+  const { addCart, setAddCart, cartItems, setCartItems, total, setTotal } =
+    props;
+  const top = useRef(null)
   return (
     <>
       <div className="background">
@@ -19,7 +22,12 @@ const CartPage = (props) => {
             </p>
           </div>
           <div className="cartItems">
-            {cartItems.map((item) => {
+            {cartItems.map((item, i) => {
+              if (item.number < 1) {
+                setCartItems((cartItems) => {
+                  return cartItems.filter((Item) => Item.id !== item.id);
+                });
+              }              
               return (
                 <>
                   <div className="cartItem">
@@ -34,14 +42,46 @@ const CartPage = (props) => {
                             Size {item.size} {item.color}
                           </p>
                         </div>
-                        <div className="count"></div>
+                        <div className="count">
+                          <h2
+                            onClick={() => {
+                              setCartItems([
+                                ...cartItems,
+                                { ...item, id:new Date().getTime(), number: item.number - 1 },
+                              ]);
+                              setCartItems((cartItems) => {
+                                return cartItems.filter(
+                                  (Item) => Item.id !== item.id
+                                );
+                              });
+                            }}
+                          >
+                            -
+                          </h2>
+                          <h2>{item.number}</h2>
+                          <h2
+                            onClick={() => {                              
+                              setCartItems([
+                                ...cartItems,
+                                { ...item, id:new Date().getTime(), number: item.number + 1 },
+                              ]);    
+                              setCartItems((cartItems) => {
+                                return cartItems.filter(
+                                  (Item) => Item.id !== item.id
+                                );
+                              });                          
+                            }}
+                          >
+                            +
+                          </h2>
+                        </div>
                       </div>
                     </div>
                     <div className="rightSection">
                       <div
                         className="close"
                         onClick={() => {
-                            setTotal(total-parseInt(item.price))
+                          setTotal(total - parseInt(item.price));
                           setCartItems((cartItems) => {
                             return cartItems.filter(
                               (Item) => Item.id !== item.id
@@ -62,9 +102,7 @@ const CartPage = (props) => {
             <h3>Total</h3>
             <h3>{total}</h3>
           </div>
-          <div className="checkOut">
-            CheckOut
-          </div>
+          <div className="checkOut">CheckOut</div>
         </div>
       </div>
     </>
