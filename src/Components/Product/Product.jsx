@@ -33,7 +33,7 @@ const Product = (props) => {
           <div
             className="addtoCart"
             onClick={() => {
-              navigate(`products/${id}`);
+              navigate(`/products/${id}`);
             }}
           >
             <p>Add to cart</p>
