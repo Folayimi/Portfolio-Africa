@@ -1,21 +1,53 @@
 import React, { useEffect, useState, useRef } from "react";
 import "./CartPage.css";
 import { X } from "heroicons-react";
-
+import { useNavigate } from "react-router-dom";
 
 const CartPage = (props) => {
-  const { addCart, setAddCart, cartItems, setCartItems, total, setTotal } =
+  const navigate = useNavigate()
+  const { addCart, setAddCart, cartItems, setCartItems, total, setTotal, top, scrollToRef } =
     props;
-  const top = useRef(null)
+  const [changed, setChanged]= useState(false)
+  const [close, setClose] = useState(false)
+
+  useEffect(() => {   
+    setCartItems(cartItems)    
+  }, [changed]);
+
+  useEffect(()=>{
+    if(close === true){
+      setAddCart(false)
+      setClose(false)
+    }
+  },[close])
+
+  const increment = (id) => {
+    cartItems.forEach((element) => {
+      if (element.id == id) {
+        element.number += 1;
+      }
+    });
+    setChanged(!changed)
+  };
+
+  const decrement = (id) => {
+    cartItems.forEach((element) => {
+      if (element.id == id) {
+        element.number -= 1;
+      }
+    });
+    setChanged(!changed)
+  };
   return (
     <>
       <div className="background">
         <div className="cartCont">
           <div className="head">
-            <h4>Your Cart ( {cartItems.length} item(s) )</h4>
+            <h4>Your Cart  {cartItems.length} item(s) </h4>
             <p
               onClick={() => {
-                setAddCart(false);
+                setClose(true)    
+                scrollToRef(top)            
               }}
             >
               Cancel
@@ -27,7 +59,7 @@ const CartPage = (props) => {
                 setCartItems((cartItems) => {
                   return cartItems.filter((Item) => Item.id !== item.id);
                 });
-              }              
+              }
               return (
                 <>
                   <div className="cartItem">
@@ -45,31 +77,17 @@ const CartPage = (props) => {
                         <div className="count">
                           <h2
                             onClick={() => {
-                              setCartItems([
-                                ...cartItems,
-                                { ...item, id:new Date().getTime(), number: item.number - 1 },
-                              ]);
-                              setCartItems((cartItems) => {
-                                return cartItems.filter(
-                                  (Item) => Item.id !== item.id
-                                );
-                              });
+                              decrement(item.id)      
+                              setTotal(total - parseInt(item.price))                                       
                             }}
                           >
                             -
                           </h2>
                           <h2>{item.number}</h2>
                           <h2
-                            onClick={() => {                              
-                              setCartItems([
-                                ...cartItems,
-                                { ...item, id:new Date().getTime(), number: item.number + 1 },
-                              ]);    
-                              setCartItems((cartItems) => {
-                                return cartItems.filter(
-                                  (Item) => Item.id !== item.id
-                                );
-                              });                          
+                            onClick={() => {
+                              increment(item.id);      
+                              setTotal(total + parseInt(item.price))                        
                             }}
                           >
                             +
@@ -81,7 +99,7 @@ const CartPage = (props) => {
                       <div
                         className="close"
                         onClick={() => {
-                          setTotal(total - parseInt(item.price));
+                          setTotal(total - parseInt(item.price*item.number));
                           setCartItems((cartItems) => {
                             return cartItems.filter(
                               (Item) => Item.id !== item.id
@@ -102,7 +120,12 @@ const CartPage = (props) => {
             <h3>Total</h3>
             <h3>{total}</h3>
           </div>
-          <div className="checkOut">CheckOut</div>
+          <div className="checkOut"
+          onClick={()=>{
+            navigate('/products/payment')
+            localStorage.setItem('cartItems', JSON.stringify(cartItems))
+            localStorage.setItem('total',total)
+          }}>CheckOut</div>
         </div>
       </div>
     </>

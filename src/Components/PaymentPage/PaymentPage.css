@@ -1,0 +1,172 @@
+.Pbackground{
+    background: black;
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:white;
+}
+.Pbackground > .PCont{
+    padding-top: 3em;
+    width:85%;    
+}
+.PCont > .Phead{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap:0.5em;
+}
+.PCont > .midSection{
+    padding:3em 0em 3em 0em;    
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3em;
+    flex-wrap: wrap;
+}
+.midSection > .form{
+    flex: 0 1 30em;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap:1.5em;
+}   
+.midSection > .form > .title{
+    font-size: 1.2rem;
+}
+.midSection > .form > .section{
+    width:100%;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap:0.5em;
+}
+.midSection > .form > .section input{
+    padding:1em;
+    width: 100%;
+    border-radius: 0.5em;
+    border: 1px solid #BDBEBB;
+    background: rgba(0,0,0,0.0);
+    outline: none;
+    padding-left: 1em;
+    color:white;
+}
+.midSection > .form > .splitSection{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5em;
+    color:white;
+}
+.midSection > .form > .splitSection > .split{
+    flex: 1 1 14em;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap:0.5em;   
+}
+.midSection > .form > .splitSection > .split input{
+    padding:1em;
+    width: 100%;
+    border-radius: 0.5em;
+    border: 1px solid #BDBEBB;
+    background: rgba(0,0,0,0.0);
+    outline: none;
+    padding-left: 1em;
+    color:white;
+}
+.midSection > .form > .splitSection > .split > .date{
+    cursor:pointer;
+}
+.midSection > .form > .payNow{
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #3DC018;
+    margin:2em 0em;
+    border-radius: 1.5em;
+    cursor: pointer;
+}
+.midSection > .form > .summary{
+    margin:6em 0em 4em 0em;
+    background: #1E1E1E;
+    padding:2em;
+    border-radius: 1.5em;
+    padding-bottom: 8em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap:1em;
+}
+.midSection > .form > .summary > .summarySection{
+    background: #3F403E;
+    padding:1em;
+    border-radius: 1em;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap:1em;
+}
+.form > .summary > .summarySection > .head{
+    width:100%;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap:0.5em;
+    cursor: pointer;
+}
+.form > .summary > .summarySection > .Sbody{
+    width:100%;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    gap:1.5em;
+    flex-wrap: wrap;
+}
+.midSection > .cartCont{
+    flex: 0 1 32em;
+    background: #1E1E1E;
+    padding: 1em;
+    border-radius: 1.5em;
+}
+.midSection > .cartCont > .cartItems > .cartItem{
+    border-bottom: 1px solid gray;
+}
+.midSection > .cartCont > .section{
+    background: rgba(100,100,100);
+    border-radius: 1.5rem;
+    padding:0em;
+    padding-left:1em;
+}
+.midSection > .cartCont > .cartItems > .cartItem > .leftSection > .imageCont{
+    position:relative;
+}
+.midSection > .cartCont > .cartItems > .cartItem > .leftSection > .imageCont > .number{
+    position:absolute;
+    top:0px;
+    background: #3DC018;
+    right:0px;
+    padding:0.3em 0.7em;
+    font-size: 0.8em;
+    border-radius: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.midSection > .cartCont #top{
+    background: rgba(0,0,0,0.0);
+    padding:0em
+}
+.midSection > .cartCont > .section > .apply{
+    background: #3DC018;
+    padding:0.7em 2.5em;
+    border-radius: 1.5rem;
+}

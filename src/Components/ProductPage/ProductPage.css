@@ -31,28 +31,34 @@
     flex-wrap: wrap;
     gap:2em;
 }
+.productViewCont > .reviewCont > .reviews > .moreR{
+    padding: 0.5em 1em;
+    border: 1px solid gray;
+    border-radius: 1em;
+    cursor: pointer;
+}
 .productViewCont > .reviewCont > .reviews > .review{
     width:100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: flex-start;
     padding:2em;
     background: #444544;
     border-radius: 1.5rem;
+    gap: 3em;
     flex-wrap: wrap;
 }
-.productViewCont > .reviewCont > .reviews > .review p{
-    width:80%;
+.productViewCont > .reviewCont > .reviews > .review > .message{
+    width:50em;
 }
 .productViewCont > .reviewCont > .reviews > .review > .right{
-    width: 20%;
+    width: 10em;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: flex-end;
-    text-align: right;
-    gap:0.5em;
     font-weight: bolder;
+    gap:1.5em;
 }
 .productViewCont > .reviewCont > .reviews > .review > .right > .stars{
     display: flex;

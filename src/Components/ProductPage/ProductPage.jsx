@@ -14,12 +14,14 @@ const ProductPage = () => {
   );
   const [color, setColor] = useState(selectedProduct.colorType[0].color);
   const [size, setSize] = useState(0);
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
   const [addCart, setAddCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [moreR, setMoreR] = useState(false);
   const top = useRef(null);
   useEffect(() => {
     scrollToRef(top);
+    localStorage.clear()
   }, []);
   return (
     <>
@@ -32,6 +34,8 @@ const ProductPage = () => {
             setCartItems={setCartItems}
             total={total}
             setTotal={setTotal}
+            top={top}
+            scrollToRef={scrollToRef}
           />
         )}
         <div className="productViewCont">
@@ -72,26 +76,66 @@ const ProductPage = () => {
           <div className="reviewCont">
             <p className="head">Reviews</p>
             <div className="reviews">
-              {selectedProduct.reviews.map((items) => {
-                return (
-                  <>
-                    <div className="review">
-                      <p>{items.message}</p>
-                      <div className="right">
-                        <p>{items.name}</p>
-                        <p>{items.country}</p>
-                        <div className="stars">
-                          <Star />
-                          <Star />
-                          <Star />
-                          <Star />
-                          <Star />
+              {selectedProduct.reviews.map((items, i) => {
+                if (moreR === false && i < 3) {
+                  return (
+                    <>
+                      <div className="review">
+                        <p className="message">{items.message}</p>
+                        <div className="right">
+                          <p>{items.name}</p>
+                          <p>{items.country}</p>
+                          <div className="stars">
+                            <Star />
+                            <Star />
+                            <Star />
+                            <Star />
+                            <Star />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </>
-                );
+                    </>
+                  );
+                } else if (moreR == true && i >= 0) {
+                  return (
+                    <>
+                      <div className="review">
+                        <p className="message">{items.message}</p>
+                        <div className="right">
+                          <p>{items.name}</p>
+                          <p>{items.country}</p>
+                          <div className="stars">
+                            <Star />
+                            <Star />
+                            <Star />
+                            <Star />
+                            <Star />
+                          </div>
+                        </div>
+                      </div>
+                    </>
+                  );
+                }
               })}
+              {selectedProduct.reviews.length > 3 && moreR === false ? (
+                <div
+                  className="moreR"
+                  onClick={() => {
+                    setMoreR(true);
+                  }}
+                >
+                  <p>Load More Reviews</p>
+                </div>
+              ) : (
+                <div
+                  className="moreR"
+                  onClick={() => {
+                    setMoreR(false);
+                  }}
+                >
+                  <p>Load Less Reviews</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -140,9 +184,9 @@ const ProductDetail = ({
   setCartItems,
   cartItems,
   setTotal,
-  total
+  total,
 }) => {
-  const [content, setContent] = useState("description");  
+  const [content, setContent] = useState("description");
   return (
     <>
       <div className="section">
@@ -214,7 +258,7 @@ const ProductDetail = ({
               }
             }
             setAddCart(true);
-            setTotal(total+parseInt(selectedProduct.price))
+            setTotal(total + parseInt(selectedProduct.price));
           }}
         >
           Add To Cart
