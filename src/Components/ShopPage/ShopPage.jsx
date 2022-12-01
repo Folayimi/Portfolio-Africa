@@ -52,7 +52,7 @@ const ShopPage = () => {
         <div className="bodyCont">
           <div className="body">
             {Prd.map((items) => {
-              return <Product {...items} key={items.id} />;
+              return <Product {...items} key={items.id} scrollToRef={scrollToRef} top={top} />;
             })}
           </div>
         </div> 
