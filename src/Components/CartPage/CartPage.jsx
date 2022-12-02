@@ -66,7 +66,7 @@ const CartPage = (props) => {
                   <div className="cartItem">
                     <div className="leftSection">
                       <div className="imageCont">
-                        <img src={item.img} alt="image" />
+                        <img src={item.img} alt="image"/>
                       </div>
                       <div className="description">
                         <div>

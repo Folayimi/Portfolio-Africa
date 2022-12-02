@@ -67,13 +67,14 @@
 }
 .cartItems > .cartItem > .leftSection{
     display:flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     gap:0.5em;
 }
 .cartItems > .cartItem > .leftSection> .imageCont{
     flex: 0 1 6em;
-    height: auto;
+    height: 6em;
+    border-radius: 0.5em;
 }
 .cartItems > .cartItem > .leftSection> .imageCont img{
     width: 100%;
