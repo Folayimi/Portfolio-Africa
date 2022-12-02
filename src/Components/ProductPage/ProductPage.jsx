@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from "react";
 import { Prd, ProductData } from "../../MockAPI/MockData";
 import Product from "../Product/Product";
 import CartPage from "../CartPage/CartPage";
+import Modal from "../Modal/Modal";
 import "./ProductPage.css";
 import { useParams } from "react-router-dom";
 import { Star } from "heroicons-react";
@@ -17,11 +18,14 @@ const ProductPage = () => {
   const [total, setTotal] = useState(0);
   const [addCart, setAddCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [error, setError] = useState(false);
   const [moreR, setMoreR] = useState(false);
+  const [message, setMessage] = useState("Please Select a Size");
+
   const top = useRef(null);
   useEffect(() => {
     scrollToRef(top);
-    localStorage.clear()
+    localStorage.clear();
   }, []);
   return (
     <>
@@ -36,8 +40,10 @@ const ProductPage = () => {
             setTotal={setTotal}
             top={top}
             scrollToRef={scrollToRef}
+            setSize={setSize}
           />
         )}
+        {error && <Modal message={message} setError={setError} />}
         <div className="productViewCont">
           <div className="productView">
             <div className="leftSection">
@@ -69,6 +75,7 @@ const ProductPage = () => {
                   size={size}
                   setTotal={setTotal}
                   total={total}
+                  setError={setError}                  
                 />
               }
             </div>
@@ -137,15 +144,22 @@ const ProductPage = () => {
                 </div>
               )}
             </div>
-          </div>          
+          </div>
           <div className="bodyHead">
             <p>Other Products</p>
           </div>
         </div>
-        <div className="bodyCont">          
+        <div className="bodyCont">
           <div className="body">
             {Prd.map((items) => {
-              return <Product {...items} key={items.id} scrollToRef={scrollToRef} top={top}/>;
+              return (
+                <Product
+                  {...items}
+                  key={items.id}
+                  scrollToRef={scrollToRef}
+                  top={top}
+                />
+              );
             })}
           </div>
         </div>
@@ -188,6 +202,7 @@ const ProductDetail = ({
   cartItems,
   setTotal,
   total,
+  setError,  
 }) => {
   const [content, setContent] = useState("description");
   return (
@@ -206,12 +221,12 @@ const ProductDetail = ({
             return (
               <>
                 <div
-                  className="colorType"
+                  className={items.color === color ? "colorType2" : "colorType"}
                   onClick={() => {
                     setColor(items.color);
                   }}
                 >
-                  <img src={items.images[0].img} alt="" />
+                  <img src={items.images[0].img} alt="itemImage" />
                 </div>
               </>
             );
@@ -228,9 +243,9 @@ const ProductDetail = ({
             return (
               <>
                 <div
-                  className="size"
+                  className={items.size === size ? "size2" : "size"}
                   onClick={() => {
-                    setSize(items.size);
+                    setSize(items.size);                    
                   }}
                 >
                   {items.size}
@@ -245,7 +260,7 @@ const ProductDetail = ({
           className="addToCart"
           onClick={() => {
             for (var i = 0; i < selectedProduct.colorType.length; i++) {
-              if (selectedProduct.colorType[i].color === color) {
+              if (selectedProduct.colorType[i].color === color && size !== 0) {
                 setCartItems([
                   ...cartItems,
                   {
@@ -259,9 +274,15 @@ const ProductDetail = ({
                   },
                 ]);
               }
+              if (size !== 0) {
+                setError(false);
+                setAddCart(true);
+                setTotal(total + parseInt(selectedProduct.price));
+              } else {
+                setAddCart(false);
+                setError(true);
+              }
             }
-            setAddCart(true);
-            setTotal(total + parseInt(selectedProduct.price));
           }}
         >
           Add To Cart

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const CartPage = (props) => {
   const navigate = useNavigate()
-  const { addCart, setAddCart, cartItems, setCartItems, total, setTotal, top, scrollToRef } =
+  const { addCart, setAddCart, cartItems, setCartItems, total, setTotal, top, scrollToRef, setSize } =
     props;
   const [changed, setChanged]= useState(false)
   const [close, setClose] = useState(false)
@@ -47,7 +47,8 @@ const CartPage = (props) => {
             <p
               onClick={() => {
                 setClose(true)    
-                scrollToRef(top)            
+                scrollToRef(top)      
+                setSize(0)      
               }}
             >
               Cancel

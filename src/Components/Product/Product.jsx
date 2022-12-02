@@ -6,7 +6,7 @@ import "./Product.css";
 
 const Product = (props) => {
   const navigate = useNavigate();
-  const { id, name, price, img, scrollToRef, top } = props;
+  const { id, name, price, img, scrollToRef, top} = props;
   const [selected, setSelected] = useState(false);
   return (
     <>
@@ -34,7 +34,7 @@ const Product = (props) => {
             className="addtoCart"
             onClick={() => {
               navigate(`/products/${id}`);
-              scrollToRef(top)
+              scrollToRef(top);
             }}
           >
             <p>Add to cart</p>

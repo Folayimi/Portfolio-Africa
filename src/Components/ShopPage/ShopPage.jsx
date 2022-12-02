@@ -1,7 +1,7 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import { Prd, Categories } from "../../MockAPI/MockData";
 import Product from "../Product/Product";
-import { ChevronDown, Heart } from "heroicons-react";
+import { ChevronDown } from "heroicons-react";
 import "./ShopPage.css";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
@@ -52,10 +52,17 @@ const ShopPage = () => {
         <div className="bodyCont">
           <div className="body">
             {Prd.map((items) => {
-              return <Product {...items} key={items.id} scrollToRef={scrollToRef} top={top} />;
+              return (
+                <Product
+                  {...items}
+                  key={items.id}
+                  scrollToRef={scrollToRef}
+                  top={top}
+                />
+              );
             })}
           </div>
-        </div> 
+        </div>
       </div>
     </>
   );
