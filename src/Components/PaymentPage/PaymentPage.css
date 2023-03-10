@@ -15,6 +15,7 @@
     justify-content: flex-start;
     align-items: center;
     gap:0.5em;
+    cursor: pointer;
 }
 .PCont > .midSection{
     padding:3em 0em 3em 0em;    
@@ -145,6 +146,7 @@
     border-radius: 1.5rem;
     padding:0em;
     padding-left:1em;
+    justify-content: flex-end;
 }
 .midSection > .cartCont > .cartItems > .cartItem > .leftSection > .imageCont{
     position:relative;

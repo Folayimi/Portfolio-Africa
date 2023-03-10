@@ -1,10 +1,13 @@
 // react es7+/es6+ (rafce)
 import React, { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./PaymentPage.css";
-import { ChevronRight, PencilAltOutline } from "heroicons-react";
+import { ChevronLeft, PencilAltOutline } from "heroicons-react";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+
 const PaymentPage = () => {
+  const navigate = useNavigate();
   const top = useRef(null);
   const [cartItems, setCartItems] = useState(
     JSON.parse(localStorage.cartItems)
@@ -38,7 +41,7 @@ const PaymentPage = () => {
     { id: 2, title: "Card Name", name: "cardName" },
   ];
   useEffect(() => {
-    scrollToRef(top)
+    scrollToRef(top);
   }, []);
   const handleChange = (e) => {
     const name = e.target.name;
@@ -50,13 +53,8 @@ const PaymentPage = () => {
     <>
       <div className="Pbackground" ref={top}>
         <div className="PCont">
-          <div className="Phead">
-            <h4>Cart</h4>
-            <ChevronRight size="20px" />
-            <h4>Information</h4>
-            <ChevronRight size="20px" />
-            <h4>Delivery</h4>
-            <ChevronRight size="20px" />
+          <div className="Phead" onClick={()=> navigate(-1)}>            
+            <ChevronLeft size="20px" />
             <h4>Payment</h4>
           </div>
           <div className="midSection">
@@ -189,7 +187,6 @@ const PaymentPage = () => {
                 <p>Apply Discount</p>
               </div>
               <div className="section">
-                <p>{userDetails.firstName}</p>
                 <div className="apply">Apply</div>
               </div>
               <div className="section" id="top">

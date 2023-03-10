@@ -4,11 +4,12 @@ import Product from "../Product/Product";
 import CartPage from "../CartPage/CartPage";
 import Modal from "../Modal/Modal";
 import "./ProductPage.css";
-import { useParams } from "react-router-dom";
-import { Star } from "heroicons-react";
+import { useParams, useNavigate } from "react-router-dom";
+import { Star, ChevronLeft } from "heroicons-react";
 
 const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
 const ProductPage = () => {
+  const navigate = useNavigate();
   const { Id } = useParams();
   const selectedProduct = ProductData.find(
     (items) => items.id === parseInt(Id)
@@ -18,15 +19,26 @@ const ProductPage = () => {
   const [total, setTotal] = useState(0);
   const [addCart, setAddCart] = useState(false);
   const [cartItems, setCartItems] = useState([]);
+  const [newItem, setNewItem] = useState(true);
+  // const [cartItems, setCartItems] = useState(
+  //   JSON.parse(localStorage.cartItems)
+  // );
   const [error, setError] = useState(false);
   const [moreR, setMoreR] = useState(false);
   const [message, setMessage] = useState("Please Select a Size");
 
-  const top = useRef(null);
   useEffect(() => {
     scrollToRef(top);
-    localStorage.clear();
+    if (localStorage.length === 0) {
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      localStorage.setItem("total", total);
+    } else {
+      setCartItems(JSON.parse(localStorage.cartItems));
+      setTotal(JSON.parse(localStorage.total));
+    }
   }, []);
+
+  const top = useRef(null);
   return (
     <>
       <div className="productCont" ref={top}>
@@ -45,7 +57,11 @@ const ProductPage = () => {
         )}
         {error && <Modal message={message} setError={setError} />}
         <div className="productViewCont">
-          <div className="productView">
+          <div className="Phead" onClick={() => navigate(-1)}>
+            <ChevronLeft size="20px" />
+            <h4>Product</h4>
+          </div>          
+          <div className="productView">          
             <div className="leftSection">
               {selectedProduct.colorType.map((item) => {
                 {
@@ -75,7 +91,9 @@ const ProductPage = () => {
                   size={size}
                   setTotal={setTotal}
                   total={total}
-                  setError={setError}                  
+                  setError={setError}
+                  newItem={newItem}
+                  setNewItem={setNewItem}
                 />
               }
             </div>
@@ -202,7 +220,9 @@ const ProductDetail = ({
   cartItems,
   setTotal,
   total,
-  setError,  
+  setError,
+  newItem,
+  setNewItem,
 }) => {
   const [content, setContent] = useState("description");
   return (
@@ -239,20 +259,22 @@ const ProductDetail = ({
           <p>View Styleguide</p>
         </div>
         <div className="sizes">
-          {selectedProduct.sizes.map((items) => {
-            return (
-              <>
-                <div
-                  className={items.size === size ? "size2" : "size"}
-                  onClick={() => {
-                    setSize(items.size);                    
-                  }}
-                >
-                  {items.size}
-                </div>
-              </>
-            );
-          })}
+          <div className="sizesCont">
+            {selectedProduct.sizes.map((items) => {
+              return (
+                <>
+                  <div
+                    className={items.size === size ? "size2" : "size"}
+                    onClick={() => {
+                      setSize(items.size);
+                    }}
+                  >
+                    {items.size}
+                  </div>
+                </>
+              );
+            })}
+          </div>
         </div>
       </div>
       <div className="section">
@@ -261,23 +283,37 @@ const ProductDetail = ({
           onClick={() => {
             for (var i = 0; i < selectedProduct.colorType.length; i++) {
               if (selectedProduct.colorType[i].color === color && size !== 0) {
-                setCartItems([
-                  ...cartItems,
-                  {
-                    id: new Date().getTime(),
-                    color: color,
-                    number: 1,
-                    img: selectedProduct.colorType[i].images[0].img,
-                    price: selectedProduct.price,
-                    name: selectedProduct.name,
-                    size: size,
-                  },
-                ]);
+                const newCart = cartItems.find(
+                  (item) =>
+                    item.color === color &&
+                    item.price === selectedProduct.price &&
+                    item.name === selectedProduct.name &&
+                    item.size === size
+                );
+
+                if (newCart) {
+                  newCart.number += 1;
+                } else {
+                  setCartItems([
+                    ...cartItems,
+                    {
+                      id: new Date().getTime(),
+                      color: color,
+                      number: 1,
+                      img: selectedProduct.colorType[i].images[0].img,
+                      price: selectedProduct.price,
+                      name: selectedProduct.name,
+                      size: size,
+                    },
+                  ]);
+                }
               }
               if (size !== 0) {
+                setTotal(total + parseInt(selectedProduct.price));
+                localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                localStorage.setItem("total", total);
                 setError(false);
                 setAddCart(true);
-                setTotal(total + parseInt(selectedProduct.price));
               } else {
                 setAddCart(false);
                 setError(true);

@@ -110,16 +110,15 @@
 
 .bodyCont{
     width:100%;
-    padding:3em 0em;
+    padding:30px 40px;
     display:flex;
     justify-content: center;
     align-items: center;
 }
-.bodyCont > .body{
-    width:85%;
+.bodyCont > .body{    
     display:flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    gap:2.5em;
+    gap:1.5em;
     flex-wrap: wrap;    
 }

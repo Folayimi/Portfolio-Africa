@@ -15,8 +15,7 @@ const Product = (props) => {
           <div
             className="wish"
             onClick={() => {
-              setSelected(!selected);
-              console.log(id);
+              setSelected(!selected);              
             }}
           >
             <Heart color={selected ? "green" : "white"} />

@@ -339,7 +339,7 @@ export const ProductData = [
           { id: 3, img: image4 },
           { id: 4, img: image7 },
           { id: 5, img: image6 },
-          { id: 6, img: image5 },
+          { id: 6, img: image5 },          
         ],
       },
       {
